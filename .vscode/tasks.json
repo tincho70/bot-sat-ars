@@ -1,0 +1,13 @@
+{
+    "version": "2.0.0",
+    "tasks": [
+      {
+        "label": "restart bot-sat-ars",
+        "type": "shell",
+        "command": "docker compose restart bot-sat-ars",
+        "presentation": {
+          "reveal": "never"
+        }
+      }
+    ]
+  }

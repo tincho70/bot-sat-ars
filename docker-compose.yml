@@ -1,0 +1,3 @@
+services:
+  bot-sat-ars:
+    container_name: bot-sat-ars
