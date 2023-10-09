@@ -1,8 +1,16 @@
 name: prueba
+
 on:
   workflow_dispatch:
-    branches:
-      - main
+    # Inputs the workflow accepts.
+    inputs:
+      iceCream:
+        # Friendly description to be shown in the UI instead of 'name'
+        description: 'Should eat ice cream'
+        # Default value if no value is explicitly provided
+        default: true
+        # Input has to be provided for the workflow to run
+        required: true
 
 jobs:
   prepare:
