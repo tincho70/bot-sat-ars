@@ -12,6 +12,10 @@ jobs:
       - name: Extract version and set it to TAG env var
         run: |
           echo "TAG=$(jq -r '.version' package.json)" >> $GITHUB_ENV
-      - name: Show me the tag
-        run: |
-          echo $GITHUB_ENV
+      - name: Build and push
+        uses: docker/build-push-action@v3
+        with:
+          push: true
+          tags: |
+            ${{ secrets.DOCKERHUB_REPO }}:latest
+            ${{ secrets.DOCKERHUB_REPO }}:${{ env.TAG }}
