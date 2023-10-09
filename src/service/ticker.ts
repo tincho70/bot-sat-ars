@@ -6,8 +6,6 @@ const botTicker = (client: Client) => {
     try {
       const yadio = await convert(1, 'ars', 'sat')
       if (yadio && !yadio.error) {
-        console.dir(yadio)
-        //const ars = yadio.result //* 100000000
         const nickname = `$${(1 / yadio.result).toLocaleString('es-AR')} ARS`
         client.user!.setPresence({
           activities: [
