@@ -1,5 +1,8 @@
 name: prueba
-on: workflow_dispatch
+on:
+  workflow_dispatch:
+    branches:
+      - main
 
 jobs:
   prepare:
