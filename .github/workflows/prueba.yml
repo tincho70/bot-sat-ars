@@ -7,6 +7,8 @@ jobs:
   prepare:
     runs-on: ubuntu-latest
     steps:
+      - name: Checkout
+        uses: actions/checkout@v2
       - name: Extract version and set it to TAG env var
         run: |
           echo "TAG=$(jq -r '.version' package.json)" >> $GITHUB_ENV
