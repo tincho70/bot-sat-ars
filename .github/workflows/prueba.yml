@@ -12,3 +12,4 @@ jobs:
       - name: Extract version and set it to TAG env var
         run: |
           echo "TAG=$(jq -r '.version' package.json)" >> $GITHUB_ENV
+          echo $GITHUB_ENV
