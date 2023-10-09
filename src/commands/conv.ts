@@ -40,9 +40,9 @@ const command: SlashCommand = {
 
       if (yadio && !yadio.error) {
         interaction.editReply({
-          content: `${amount} ${pares[0]} = ${Math.round(
-            yadio.result
-          ).toLocaleString('es-AR')} ${pares[1]}`,
+          content: `${amount.toLocaleString('es-AR')} ${
+            pares[0]
+          } = ${yadio.result.toLocaleString('es-AR')} ${pares[1]}`,
         })
       } else {
         interaction.editReply({
