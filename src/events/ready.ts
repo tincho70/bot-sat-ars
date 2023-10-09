@@ -12,6 +12,7 @@ const event: BotEvent = {
     cron.schedule('* * * * *', async () => {
       await client.updateTicker()
     })
+    await client.updateTicker()
     deployCommands(client)
     console.log('Discord bot ready!')
   },
