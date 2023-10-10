@@ -3,6 +3,6 @@ version: "3.7"
 services:
   bot-sat-ars:
     container_name: bot-sat-ars
-    image: tincho70/bot-sat-ars
+    image: tincho70/bot-sat-ars:${TAG}
     restart: always
     build: .
