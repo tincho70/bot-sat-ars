@@ -4,15 +4,18 @@ import convert from './Yadio'
 const botTicker = (client: Client) => {
   client.updateTicker = async () => {
     try {
-      const yadio = await convert(1, 'ars', 'sat')
+      const yadio = await convert(1, 'sat', 'ars')
       if (yadio && !yadio.error) {
-        const nickname = `$${(1 / yadio.result).toLocaleString('es-AR')} ARS`
+        const nickname = `$${yadio.result.toLocaleString('es-AR')} ARS`
         client.user!.setPresence({
           activities: [
             {
               type: ActivityType.Custom,
               name: 'custom', // name is exposed through the API but not shown in the client for ActivityType.Custom
-              state: `${yadio.result.toLocaleString('es-AR')} SAT = $1 ARS`,
+              state: `1 ARS ~ ${(1 / yadio.result).toLocaleString('es-AR', {
+                minimumFractionDigits: 2,
+                maximumFractionDigits: 2,
+              })} SAT`,
             },
           ],
           status: 'online',

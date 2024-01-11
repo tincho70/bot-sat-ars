@@ -1,6 +1,6 @@
 {
   "name": "bot-sat-ars",
-  "version": "0.2.0",
+  "version": "0.2.1",
   "description": "Un bot de Discrod para mostrar el precio de los Satoshis en pesos Argentinos",
   "main": "index.js",
   "scripts": {
