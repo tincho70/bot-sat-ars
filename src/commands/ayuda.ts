@@ -5,9 +5,10 @@ const command: SlashCommand = {
   data: new SlashCommandBuilder()
     .setName('ayuda')
     .setDescription('Obtiene ayuda para los comandos del bot'),
+  cooldown: 1 * 60 * 60, // 1 hour
   execute: async (interaction) => {
     try {
-      await interaction.deferReply({ ephemeral: true })
+      await interaction.deferReply()
       const author = {
         name: 'Bot Satoshi - $ARS',
         iconURL: '',

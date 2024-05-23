@@ -26,6 +26,7 @@ for (const file of eventFiles) {
   }
 }
 
+client.cooldowns = new Collection<string, number>()
 client.commands = new Collection<string, SlashCommand>()
 const commandsPath = join(__dirname, 'commands')
 const commandFiles = readdirSync(commandsPath)
