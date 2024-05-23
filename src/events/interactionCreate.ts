@@ -7,7 +7,7 @@ const event: BotEvent = {
     if (interaction.isChatInputCommand()) {
       const command = interaction.client.commands.get(interaction.commandName)
       const cooldown = interaction.client.cooldowns.get(
-        `${interaction.commandName}-${interaction.user.username}`
+        `${interaction.commandName}-${interaction.guildId}-${interaction.user.username}`
       )
       if (!command) return
       if (command.cooldown && cooldown) {
@@ -31,7 +31,7 @@ const event: BotEvent = {
         }, command.cooldown * 1000)
       } else if (command.cooldown && !cooldown) {
         interaction.client.cooldowns.set(
-          `${interaction.commandName}-${interaction.user.username}`,
+          `${interaction.commandName}-${interaction.guildId}-${interaction.user.username}`,
           Date.now() + command.cooldown * 1000
         )
       }
