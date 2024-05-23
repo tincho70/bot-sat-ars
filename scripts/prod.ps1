@@ -1,11 +1,6 @@
-#!/usr/bin/env -S -- bash
-# -*- coding: ascii -*-
+$j = Get-Content package.json | ConvertFrom-Json
 
-set -e -o pipefail
-cd "$(readlink -e -- "${0%/*}/.." || true)"
-
-
-export TAG=$(jq -r '.version' package.json)
+$TAG = $j.version
 
 docker compose -f docker-compose.prod.yml build
 docker tag tincho70/bot-sat-ars:latest tincho70/bot-sat-ars:$TAG
