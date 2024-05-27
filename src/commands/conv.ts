@@ -1,4 +1,9 @@
-import { SlashCommandBuilder } from 'discord.js'
+import {
+  ActionRowBuilder,
+  ButtonBuilder,
+  ButtonStyle,
+  SlashCommandBuilder,
+} from 'discord.js'
 import { SlashCommand } from '../types'
 import convert from '../service/Yadio'
 
@@ -39,13 +44,22 @@ const command: SlashCommand = {
       const yadio = await convert(amount, pares[0], pares[1])
 
       if (yadio && !yadio.error) {
-        interaction.editReply({
+        const row = new ActionRowBuilder<ButtonBuilder>().addComponents([
+          new ButtonBuilder()
+            .setCustomId('publicar')
+            .setEmoji({ name: `📤` })
+            .setStyle(ButtonStyle.Primary)
+            .setLabel('Publicar conversión'),
+        ])
+
+        await interaction.editReply({
           content: `${amount.toLocaleString('es-AR')} ${
             pares[0]
           } = ${yadio.result.toLocaleString('es-AR')} ${pares[1]}`,
+          components: [row],
         })
       } else {
-        interaction.editReply({
+        await interaction.editReply({
           content: 'Hubo un error al intentar convertir el monto...',
         })
         console.error(yadio)

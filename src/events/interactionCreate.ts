@@ -1,9 +1,15 @@
-import { Interaction } from 'discord.js'
+import {
+  ActionRowBuilder,
+  ButtonBuilder,
+  ButtonComponent,
+  EmbedBuilder,
+  Interaction,
+} from 'discord.js'
 import { BotEvent } from '../types'
 
 const event: BotEvent = {
   name: 'interactionCreate',
-  execute: (interaction: Interaction) => {
+  execute: async (interaction: Interaction) => {
     if (interaction.isChatInputCommand()) {
       const command = interaction.client.commands.get(interaction.commandName)
       const cooldown = interaction.client.cooldowns.get(
@@ -50,6 +56,25 @@ const event: BotEvent = {
       } catch (error) {
         console.error(error)
       }
+    } else if (interaction.isButton() && interaction.customId === 'publicar') {
+      const originalChannel = interaction.channel
+      if (originalChannel) {
+        const embed = new EmbedBuilder()
+          .setDescription(`# ${interaction.message.content}`)
+          .setColor('#f99823')
+        originalChannel.send({ embeds: [embed] })
+      } else {
+        console.error('Interaction is not in a guild.')
+      }
+
+      const button = interaction.message.components[0]
+        .components[0] as ButtonComponent
+      const bb = ButtonBuilder.from(button).setDisabled(true)
+      const row = new ActionRowBuilder<ButtonBuilder>().addComponents(bb)
+
+      interaction.update({
+        components: [row],
+      })
     }
   },
 }
